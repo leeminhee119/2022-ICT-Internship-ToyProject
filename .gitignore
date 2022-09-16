@@ -34,3 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+musicalRank.json
+musicalArtists.json
+concertArtists.json
+geckodriver.log
+concertRank.json
+crawling/chromedriver.exe
