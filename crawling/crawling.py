@@ -2,8 +2,9 @@ from argparse import Action
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from datetime import datetime
-from selenium.webdriver.common.action_chains import ActionChains
-import json
+
+
+import json 
 
 
 
@@ -14,7 +15,7 @@ def toJson(dict, type):
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option("excludeSwitches", ["enable-logging"])
-driver = webdriver.Chrome(r'C:\Users\user\Desktop\workspace\nodejs\toyproject\2022-internship-toy\crawling\chromedriver.exe', options=options)
+driver = webdriver.Chrome('crawling\chromedriver.exe', options=options)
 driver.implicitly_wait(10) 
 
 def crawl_topranking(type):
