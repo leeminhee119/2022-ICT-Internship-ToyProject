@@ -5,21 +5,14 @@ import { Thumbnail } from '../ts-components/Thumbnail'
 import { Top } from '../ts-components/styled-components/style'
 import { GetServerSideProps } from 'next'
 
-/* 객체 -> 배열로 for map 함수 사용 */
-function getTop(range:number, type:any) {
-  const arrTop: any[] = []
-  for (let i=0; i<range; i++) {
-    arrTop.push(type[i+1])
-  }
-  return arrTop;
-}
-
 interface HomeProps {
   data: any
 }
 
 const Home: NextPage<HomeProps> = ({data}:{data:any}) => {
   const cntTop = 20;
+  const muscialValues = Object.values(data.data.musical);
+  const concertValues = Object.values(data.data.concert);
   return (
     <>
     <Head>
@@ -33,23 +26,27 @@ const Home: NextPage<HomeProps> = ({data}:{data:any}) => {
         <Top.Title>뮤지컬 TOP {cntTop}</Top.Title>
         <Top.Item>
           {
-            getTop(cntTop, data.data.musical).map((item) => {
+            muscialValues.map((prd, index) => {
               return(
-                <Thumbnail key={item}
-                thumbnailUrl={item.imgsrc} title={item.title} />
+                <Thumbnail key={index}
+                thumbnailUrl={prd.thumbnailUrl} 
+                title={prd.title}
+                reservationHref={prd.reservationHref} />
               )
             })
-          } 
+          }
         </Top.Item>
       </Top.Section>
       <Top.Section>
         <Top.Title>콘서트 TOP {cntTop}</Top.Title>
         <Top.Item>
           {
-            getTop(cntTop, data.data.concert).map((item) => {
+            concertValues.map((prd, index) => {
               return(
-                <Thumbnail key={item}
-                thumbnailUrl={item.imgsrc} title={item.title} />
+                <Thumbnail key={index}
+                thumbnailUrl={prd.thumbnailUrl} 
+                title={prd.title}
+                reservationHref={prd.reservationHref} />
               )
             })
           }
@@ -74,7 +71,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     }
   }
-  
   return { props: { data: data } }
 }
 

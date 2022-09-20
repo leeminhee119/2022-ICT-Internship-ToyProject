@@ -33,6 +33,13 @@ const ThumbnailBox = { // Item > ImgBox + ItemBox
                 z-index: -1;
             }
         }
+        &.nonHover {
+            &:hover {
+                img {
+                    opacity: 1;
+                }
+            }
+        }
         div.default-img {
             position: absolute;
             left: 0;
@@ -68,6 +75,11 @@ const ThumbnailBtn = {
         border-radius: 20px;
         font-size: 12px;
         font-weight: bold;
+        background-color: #fff;
+        &.disable {
+            background-color: grey;
+            color: rgba(0,0,0,0.5);
+        }
     `,
 }
 const CircleThumbnailBox = {
@@ -90,7 +102,7 @@ interface ThumbnailInterface {
     title: string,
     carpoolUrl?: string,
     reviewsUrl?: string,
-    reservationUrl?: string,
+    reservationHref?: string,
 }
 export const Thumbnail = (props: ThumbnailInterface) => {
     if (props.thumbnailUrl == null || props.thumbnailUrl == '') {
@@ -106,9 +118,17 @@ export const Thumbnail = (props: ThumbnailInterface) => {
             <ThumbnailBox.ImgBox>
                 <img src={props.thumbnailUrl} />
                 <ThumbnailBtn.BtnBox>
-                <ThumbnailBtn.Btn href={props.carpoolUrl}>동행</ThumbnailBtn.Btn>
+                {
+                    props.reservationHref == null || props.reservationHref == ''?
+                    <ThumbnailBtn.Btn className='disable'>예매</ThumbnailBtn.Btn>
+                    :<ThumbnailBtn.Btn href={props.reservationHref}>예매</ThumbnailBtn.Btn>
+                }
+                {
+                    props.reservationHref == null || props.reservationHref == ''?
+                    <ThumbnailBtn.Btn className="disable">동행</ThumbnailBtn.Btn>
+                    :<ThumbnailBtn.Btn href={props.carpoolUrl}>동행</ThumbnailBtn.Btn>
+                }
                 <ThumbnailBtn.Btn href={props.reviewsUrl}>후기</ThumbnailBtn.Btn>
-                <ThumbnailBtn.Btn href={props.reservationUrl}>예매</ThumbnailBtn.Btn>
                 </ThumbnailBtn.BtnBox>
             </ThumbnailBox.ImgBox>
             <ThumbnailBox.InfoBox>
@@ -126,7 +146,7 @@ interface CircleThumbnailInterface {
 export const CircleThumbnail = (props:CircleThumbnailInterface) => {
     return (
         <CircleThumbnailBox.Item>
-            <CircleThumbnailBox.ImgBox>
+            <CircleThumbnailBox.ImgBox className="nonHover">
                 <img src={props.thumbnailUrl} />
             </CircleThumbnailBox.ImgBox>
             <CircleThumbnailBox.InfoBox>
