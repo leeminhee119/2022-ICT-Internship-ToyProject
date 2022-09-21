@@ -35,6 +35,9 @@ export const muconAppBaseStyle = {
                     text-shadow : 5px -1px 0 black;
                     transition: ease-in-out 0.3s;
                 }
+                &.atLoginPage {
+                    color: ${themeColor};
+                }
             `,
             NavAndSearchSection: styled.div`
                 display: flex;
@@ -64,6 +67,12 @@ export const navigationBar = {
         font-weight: 900;
         color: #fff;
         padding: 0 8px;
+        &.signinBox {
+            border: 1px solid #fff;
+            border-radius: 20px;
+            margin-left: 20px;
+            margin-right: -10px;
+        }
     `
 };
 export const searchBar = {

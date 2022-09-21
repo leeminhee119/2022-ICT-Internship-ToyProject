@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ReactElement } from "react";
 import AppBase from '../ts-components/AppBase';
 import { BodyLayout, TopBarSelectButton, } from "../ts-components/styled-components/style";
-import { themeColor } from "../ts-components/commonVariables";
 
 import { GetServerSideProps } from 'next'
 import MainSectionTable from "../ts-components/MainSectionTable";

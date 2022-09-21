@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { Thumbnail, CircleThumbnail } from '../ts-components/Thumbnail'
 import { subColor, themeColor } from "./commonVariables";
-
-
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface MainSectionTableInterface {
     artistsData: any[],
@@ -17,13 +16,32 @@ const MainSectionTable = (props:MainSectionTableInterface) => {
                         return (
                             <>
                             <tr>
-                                <TableArtistItem>
+                                <TableDataArtist>
                                     <CircleThumbnail key={index}
                                     name={artist.name}
                                     thumbnailUrl={artist.thumbnailUrl} />
-                                </TableArtistItem>
-                                <td>
-                                <TablePrdItem>
+                                </TableDataArtist>
+                                {/* <TableDataProducts> */}
+                                    <Swiper
+                                    spaceBetween={30}
+                                    slidesPerView={"auto"}
+                                    onSlideChange={() => console.log('slide change')}
+                                    onSwiper={(swiper) => console.log(swiper)}
+                                    >
+                                    {
+                                        Object.values(artist.history).map((prd, index) => {
+                                            return(
+                                                <SwiperSlide style={{display: 'inline-block'}}>
+                                                    <Thumbnail key={index}
+                                                    title={prd.title}
+                                                    thumbnailUrl={prd.thumbnailUrl}
+                                                    reservationHref={prd.reservationHref} />
+                                                </SwiperSlide>
+                                            )
+                                        })
+                                    }
+                                    </Swiper>
+                                {/* <TablePrdItem>
                                     {
                                         Object.values(artist.history).map((prd, index) => {
                                             return(
@@ -36,8 +54,8 @@ const MainSectionTable = (props:MainSectionTableInterface) => {
                                             )
                                         })
                                     }
-                                </TablePrdItem>
-                                </td>
+                                </TablePrdItem> */}
+                                {/* </TableDataProducts> */}
                             </tr>
                             <tr style={{
                                 height: '50px',
@@ -56,9 +74,15 @@ const Table = styled.table`
     table-layout:fixed;
     width:100%;
 `;
-const TableArtistItem = styled.td`
+const TableDataArtist = styled.td`
     width: 15%;
-`
+`;
+const TableDataProducts = styled.td`
+    height: 100px;
+    width: 85%;
+    display: flex;
+    overflow: hidden;
+`;
 const TablePrdItem = styled.div`
     display: flex;
     overflow-x: scroll;

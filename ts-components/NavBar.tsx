@@ -20,6 +20,9 @@ const NavBar = () => {
             <navigationBar.Item>
                 <Link href="/reviews"><a>공연후기</a></Link>
             </navigationBar.Item>
+            <navigationBar.Item className="signinBox">
+                <Link href="/login"><a>로그인</a></Link>
+            </navigationBar.Item>
             <navigationBar.Item>
                 <FontAwesomeIcon icon={faBars} size='2x' style={{
                     padding: '0 10px 0 20px'
