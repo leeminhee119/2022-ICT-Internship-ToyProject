@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { Thumbnail, CircleThumbnail } from '../ts-components/Thumbnail'
-import { subColor, themeColor } from "./commonVariables";
+import { themeColor } from "./commonVariables";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css'
 
 interface MainSectionTableInterface {
     artistsData: any[],
@@ -13,20 +14,22 @@ const MainSectionTable = (props:MainSectionTableInterface) => {
             <tbody>
                 {
                     Object.values(dataArray).map((artist, index) => {
+                        const historyLength = Object.values(artist.history).length
                         return (
                             <>
-                            <tr>
+                            <tr style={{display: 'flex', alignItems: 'center'}}>
                                 <TableDataArtist>
                                     <CircleThumbnail key={index}
                                     name={artist.name}
                                     thumbnailUrl={artist.thumbnailUrl} />
                                 </TableDataArtist>
-                                {/* <TableDataProducts> */}
+                                <TableDataProducts>
                                     <Swiper
-                                    spaceBetween={30}
-                                    slidesPerView={"auto"}
+                                    spaceBetween={0}
+                                    slidesPerView={(historyLength < 6)?historyLength:6.5}
                                     onSlideChange={() => console.log('slide change')}
                                     onSwiper={(swiper) => console.log(swiper)}
+                                    style={{margin: '0 30px'}}
                                     >
                                     {
                                         Object.values(artist.history).map((prd, index) => {
@@ -41,24 +44,10 @@ const MainSectionTable = (props:MainSectionTableInterface) => {
                                         })
                                     }
                                     </Swiper>
-                                {/* <TablePrdItem>
-                                    {
-                                        Object.values(artist.history).map((prd, index) => {
-                                            return(
-                                                <div>
-                                                    <Thumbnail key={index}
-                                                    title={prd.title}
-                                                    thumbnailUrl={prd.thumbnailUrl}
-                                                    reservationHref={prd.reservationHref} />
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </TablePrdItem> */}
-                                {/* </TableDataProducts> */}
+                                </TableDataProducts>
                             </tr>
                             <tr style={{
-                                height: '50px',
+                                height: '15px',
                                 borderBottom: `1px solid ${themeColor}`
                             }}></tr>
                             </>
@@ -75,29 +64,12 @@ const Table = styled.table`
     width:100%;
 `;
 const TableDataArtist = styled.td`
-    width: 15%;
+    display: flex;
+    justify-content: center;
 `;
 const TableDataProducts = styled.td`
-    height: 100px;
-    width: 85%;
     display: flex;
     overflow: hidden;
 `;
-const TablePrdItem = styled.div`
-    display: flex;
-    overflow-x: scroll;
-    ::-webkit-scrollbar {
-        height: 6px;
-        width: 4px;
-        border: 1px solid rgba(0,0,0,0.1);
-        border-radius: 10px;
-      }
-    ::-webkit-scrollbar-thumb {
-        height: 6px;
-        width: 4px;
-        border-radius: 10px;
-        background-color: ${themeColor}
-    }
-`
 
 export default MainSectionTable

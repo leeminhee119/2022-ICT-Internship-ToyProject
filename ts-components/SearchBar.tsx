@@ -8,7 +8,7 @@ const SearchBar = () => {
     return (
         <>
         <searchBar.Box>
-            <input></input>
+            <input style={{color: '#fff'}}></input>
             <FontAwesomeIcon icon={ faMagnifyingGlass } />
         </searchBar.Box>
         </>

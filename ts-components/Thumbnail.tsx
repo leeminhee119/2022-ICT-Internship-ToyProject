@@ -86,7 +86,7 @@ const CircleThumbnailBox = {
     Item: styled.div`
         width: 100px;
         height: 120px;
-        margin: 0 20px 20px 0;
+        margin: 0 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
