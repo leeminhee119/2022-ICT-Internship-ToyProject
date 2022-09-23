@@ -3,11 +3,34 @@ import { navigationBar } from "./styled-components/style";
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import axios from "axios";
 
 const NavBar = () => {
     return (
         <>
         <navigationBar.Box>
+            <navigationBar.Item>
+                <button onClick={()=>{
+                    axios.post('./api/temp/login-check').then((Response) => {
+                        if(Response.data.data.isLogin == true) {
+                            alert('로그인 되어있음')
+                        } else {
+                            alert('로그인 해주세요.')
+                        }
+                    })
+                }}>test</button>
+            </navigationBar.Item>
+            <navigationBar.Item>
+                <button onClick={()=>{
+                    axios.post('./api/temp/login').then((Response) => {
+                        if(Response.data.data.isLogin == true) {
+                            alert('로그인 되어있음')
+                        } else {
+                            alert('로그인 해주세요.')
+                        }
+                    })
+                }}>test</button>
+            </navigationBar.Item>
             <navigationBar.Item>
                 <Link href="/musical"><a>뮤지컬</a></Link>
             </navigationBar.Item>

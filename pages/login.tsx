@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactElement } from "react";
 import { themeColor, subColor } from '../ts-components/commonVariables';
 import {muconAppBaseStyle} from '../ts-components/styled-components/style';
@@ -8,30 +8,43 @@ import set_cookie from '../cookie_test/cookie';
 import { useCookies } from 'react-cookie'
 import { GetServerSideProps } from 'next'
 import axios from 'axios';
-// export async function getServerSideProps(context: { req: { headers: { cookie: any; }; }; }) {
-//     const cookies = context.req.headers.cookie;
-//     return {
-//         props: {data:cookies},
+// export async function getServerSideProps() {
+//     const res = await fetch(`http://localhost:3000/api/login-check`)
+//     const {data} = await res.json()
+
+//     if (!data) {
+//       return {
+//         redirect: {
+//           destination: '/',
+//           permanent: false,
+//         },
+//       }
 //     }
+//     return { props: { data: data } }
 // }
 
-const setCookie = (name:string, value:string) => {
+const setCookie = (user:any) => {
     var date = new Date();
     date.setTime(date.getTime()+3903333333324);
-    document.cookie = encodeURIComponent(name)+'='+encodeURIComponent(value)
+    document.cookie = encodeURIComponent(user.userID)+'='+encodeURIComponent(user.userPW)
         +';expires='+date.toUTCString()
         +';path=/';
-}
-const sendCookieToApi = () => {
-    // const cookies = document.cookie.split(`; `).map((el) => el.split('='));
-    
-    axios.post('./api/temp/login-check', document.cookie)
 }
 interface LoginPageInterface {
     children?: ReactElement[]|ReactElement
 }
 const LoginPage = (props:LoginPageInterface) => {
-    sendCookieToApi();
+    // sendCookieToApi(); 쿠키는 만들면 자동으로 서버에 전송한다.
+    const [userAccount, setUserAccount] = useState({
+        userID: '',
+        userPW: ''
+    });
+    const onChangeAccount= (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserAccount({
+            ...userAccount,
+            [e.target.name]: e.target.value,
+        })
+    }
     return (
         <Wrap>
         <LogoWrap>
@@ -43,15 +56,19 @@ const LoginPage = (props:LoginPageInterface) => {
         </LogoWrap>
         <FormWrap>
             <TitleBox>로그인</TitleBox>
-            <InputBox placeholder="아이디" type="text"></InputBox>
-            <InputBox placeholder="비밀번호" type="password"></InputBox>
-            <LoginBtn type='submit' value="확인" onClick={()=>setCookie('userID', 'mhl98')}/>
+            <InputBox placeholder="아이디" type="text" onChange={onChangeAccount}></InputBox>
+            <InputBox placeholder="비밀번호" type="password" onChange={onChangeAccount}></InputBox>
+            <LoginBtn type='submit' value="확인" onClick={()=>{
+                setCookie(userAccount);
+                axios.post('./api/temp/login').then((Response) => {
+                    if(Response.data.data.isLogin == true) {
+                        alert('로그인 되어있음')
+                    } else {
+                        alert('로그인 해주세요.')
+                    }
+                })
+            }}/>
             <JoinLink href="#">회원가입</JoinLink>
-            {/* {
-                (data.parts == null)?
-                <div>회원정보가 없습니다</div>
-                :<div>{data.parts[0]}님 반갑습니다.</div>
-            } */}
         </FormWrap>
         </Wrap>
     )
