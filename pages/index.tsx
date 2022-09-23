@@ -41,7 +41,7 @@ const Home: NextPage<HomeProps> = ({data}:{data:any}) => {
         <Top.Title>콘서트 TOP {cntTop}</Top.Title>
         <Top.Item>
           {
-            concertValues.map((prd, index) => {
+            concertValues.map((prd:any, index) => {
               return(
                 <Thumbnail key={index}
                 thumbnailUrl={prd.thumbnailUrl} 

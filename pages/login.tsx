@@ -56,9 +56,10 @@ const LoginPage = (props:LoginPageInterface) => {
         </LogoWrap>
         <FormWrap>
             <TitleBox>로그인</TitleBox>
-            <InputBox placeholder="아이디" type="text" onChange={onChangeAccount}></InputBox>
-            <InputBox placeholder="비밀번호" type="password" onChange={onChangeAccount}></InputBox>
+            <InputBox placeholder="아이디" type="text" name="userID" onChange={onChangeAccount}></InputBox>
+            <InputBox placeholder="비밀번호" type="password" name="userPW" onChange={onChangeAccount}></InputBox>
             <LoginBtn type='submit' value="확인" onClick={()=>{
+                console.log(userAccount);
                 setCookie(userAccount);
                 axios.post('./api/temp/login').then((Response) => {
                     if(Response.data.data.isLogin == true) {

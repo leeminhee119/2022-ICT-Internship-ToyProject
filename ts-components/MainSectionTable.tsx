@@ -32,7 +32,7 @@ const MainSectionTable = (props:MainSectionTableInterface) => {
                                     style={{margin: '0 30px'}}
                                     >
                                     {
-                                        Object.values(artist.history).map((prd, index) => {
+                                        Object.values(artist.history).map((prd:any, index) => {
                                             return(
                                                 <SwiperSlide style={{display: 'inline-block'}}>
                                                     <Thumbnail key={index}
