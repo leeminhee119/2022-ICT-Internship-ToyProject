@@ -1,0 +1,20 @@
+{
+    "development": {
+        "BACKEND_URL": "...",
+        "HTTP_ONLY": false,
+        "username": "root",
+        "password": "077100Lee!w",
+        "database": "mucon_db",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    },
+    "production": {
+        "BACKEND_URL": "...",
+        "HTTP_ONLY": true,
+        "username": "root",
+        "password": "077100Lee!w",
+        "database": "mucon_db",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    }
+}
