@@ -1,5 +1,25 @@
 import re, requests
 import json
+import sqlalchemy as db
+import pymysql
+
+pymysql.install_as_MySQLdb() # mysql db와의 호환 위한 함수 호출
+db_name = 'mucon_db'
+db_id = 'root'
+db_ip = 'localhost' # 자신의 로컬컴퓨터
+db_password = '077100Lee!w'
+db_port = '3306'
+
+# mysql db url따라 엔진 생성
+engine = db.create_engine("mysql+mysqldb://" + db_id + ":" + db_password + "@"
+                        + db_ip + ":" + db_port + "/" + db_name, encoding='utf-8')
+
+connection = engine.connect()
+metadata = db.MetaData()
+# 연결된 db의 테이블 가져오기
+table_artists = db.Table('artists', metadata, autoload=True, autoload_with=engine)
+table_products = db.Table('products', metadata, autoload=True, autoload_with=engine)
+
 
 """
 requests에 header를 잘 넣어야지 크롤링이 되는 경우가 있어요.
@@ -82,12 +102,9 @@ def getTopProducts(type):
     toJson(dict, '{type}Rank'.format(type=type))
 
 
-getTopProducts('musical')
-getTopProducts('concert')
-getArtists('musical')
-getArtists('concert')
-    
-
-
+# getTopProducts('musical')
+# getTopProducts('concert')
+# getArtists('musical')
+# getArtists('concert')
 
 

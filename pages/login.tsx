@@ -62,11 +62,7 @@ const LoginPage = (props:LoginPageInterface) => {
                 console.log(userAccount);
                 setCookie(userAccount);
                 axios.post('./api/temp/login').then((Response) => {
-                    if(Response.data.data.isLogin == true) {
-                        alert('로그인 되어있음')
-                    } else {
-                        alert('로그인 해주세요.')
-                    }
+                    
                 })
             }}/>
             <JoinLink href="#">회원가입</JoinLink>

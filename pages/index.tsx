@@ -11,8 +11,18 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = ({data}:{data:any}) => {
   const cntTop = 20;
-  const muscialValues = Object.values(data.data.musical);
-  const concertValues = Object.values(data.data.concert);
+  const musicalRanking = new Array;
+  const concertRanking = new Array;
+  
+  /* musical, concert 데이터 분리 */
+  for (let i=0; i<data.data.length; i++) {
+    const thisdata = data.data[i]
+    if (thisdata.type == 'musical' && thisdata.ranking <= cntTop) {
+      musicalRanking.push(thisdata)
+    } else if (thisdata.type == 'concert' && thisdata.ranking <= cntTop) {
+      concertRanking.push(thisdata)
+    }
+  }
   return (
     <>
     <Head>
@@ -26,12 +36,12 @@ const Home: NextPage<HomeProps> = ({data}:{data:any}) => {
         <Top.Title>뮤지컬 TOP {cntTop}</Top.Title>
         <Top.Item>
           {
-            muscialValues.map((prd, index) => {
+            musicalRanking.map((prd: any, index) => {
               return(
                 <Thumbnail key={index}
-                thumbnailUrl={prd.thumbnailUrl} 
+                thumbnailUrl={prd.thumbnail_url} 
                 title={prd.title}
-                reservationHref={prd.reservationHref} />
+                reservationHref={prd.reservation_url} />
               )
             })
           }
@@ -41,12 +51,12 @@ const Home: NextPage<HomeProps> = ({data}:{data:any}) => {
         <Top.Title>콘서트 TOP {cntTop}</Top.Title>
         <Top.Item>
           {
-            concertValues.map((prd:any, index) => {
+            concertRanking.map((prd:any, index) => {
               return(
                 <Thumbnail key={index}
-                thumbnailUrl={prd.thumbnailUrl} 
+                thumbnailUrl={prd.thumbnail_url} 
                 title={prd.title}
-                reservationHref={prd.reservationHref} />
+                reservationHref={prd.reservation_url} />
               )
             })
           }
@@ -60,7 +70,7 @@ const Home: NextPage<HomeProps> = ({data}:{data:any}) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
  
-  const res = await fetch(`http://localhost:3000/api/hello`)
+  const res = await fetch(`http://localhost:3000/api/products_withranking`)
   const data = await res.json()
 
    if (!data) {

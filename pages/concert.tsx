@@ -15,14 +15,14 @@ interface ConcertInterface {
 const Concert = ({data}:any, props:ConcertInterface) => {
     return (
         <FourSectionTable typeMuCon="concert"
-        data={data.concertArtist} />
+        data={data.data} />
     )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
  
     const res = await fetch(`http://localhost:3000/api/artists`)
-    const {data} = await res.json()
+    const data = await res.json()
   
      if (!data) {
       return {
