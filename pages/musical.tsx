@@ -11,15 +11,15 @@ interface MusicalInterface {
 const Musical = ({data}:any, props:MusicalInterface) => {
     return (
         <FourSectionTable typeMuCon="musical"
-        data={data.musicalArtist} />
+        data={data.data} />
     )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res = await fetch(`http://localhost:3000/api/artists`)
-  const {data} = await res.json()
+  const res = await fetch(`http://localhost:3000/api/a_p_musical`)
+  const artist = await res.json()
 
-  if (!data) {
+  if (!artist) {
     return {
       redirect: {
         destination: '/',
@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     }
   }
-  return { props: { data: data } }
+  return { props: { data: artist } }
 }
 
 export default Musical;

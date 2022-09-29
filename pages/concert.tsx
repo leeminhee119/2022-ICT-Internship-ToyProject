@@ -21,7 +21,7 @@ const Concert = ({data}:any, props:ConcertInterface) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
  
-    const res = await fetch(`http://localhost:3000/api/artists`)
+    const res = await fetch(`http://localhost:3000/api/a_p_concert`)
     const data = await res.json()
   
      if (!data) {

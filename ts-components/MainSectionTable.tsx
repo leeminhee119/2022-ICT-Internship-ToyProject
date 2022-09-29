@@ -3,42 +3,45 @@ import { Thumbnail, CircleThumbnail } from '../ts-components/Thumbnail'
 import { themeColor } from "./commonVariables";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'
+import { Key } from "react";
 
 interface MainSectionTableInterface {
     artistsData: any[],
 }
 const MainSectionTable = (props:MainSectionTableInterface) => {
-    const dataArray = props.artistsData
+    const dataArray = props.artistsData //[{id:1,...,products:[{title:'movie'}]}, {}, {}]
+    console.log(dataArray)
     return (
         <Table>
             <tbody>
                 {
-                    Object.values(dataArray).map((artist, index) => {
-                        const historyLength = Object.values(artist.history).length
+                    dataArray.map((artist, index) => {
+                        const historyLength = artist.Products.length
                         return (
                             <>
                             <tr style={{display: 'flex', alignItems: 'center'}}>
                                 <TableDataArtist>
                                     <CircleThumbnail key={index}
                                     name={artist.name}
-                                    thumbnailUrl={artist.thumbnailUrl} />
+                                    thumbnailUrl={artist.thumbnail_url} />
                                 </TableDataArtist>
                                 <TableDataProducts>
                                     <Swiper
                                     spaceBetween={0}
-                                    slidesPerView={(historyLength < 6)?historyLength:6.5}
+                                    slidesPerView={(historyLength <= 6)?historyLength:6.5}
                                     onSlideChange={() => console.log('slide change')}
                                     onSwiper={(swiper) => console.log(swiper)}
                                     style={{margin: '0 30px'}}
                                     >
                                     {
-                                        Object.values(artist.history).map((prd:any, index) => {
+                                        artist.Products.map((prd:any, index: Key | null | undefined) => {
                                             return(
                                                 <SwiperSlide style={{display: 'inline-block'}}>
                                                     <Thumbnail key={index}
                                                     title={prd.title}
-                                                    thumbnailUrl={prd.thumbnailUrl}
-                                                    reservationHref={prd.reservationHref} />
+                                                    thumbnailUrl={prd.thumbnail_url}
+                                                    reservationHref={prd.reservation_url}
+                                                    reviewsUrl={'/post/'+prd.id.toString()} />
                                                 </SwiperSlide>
                                             )
                                         })

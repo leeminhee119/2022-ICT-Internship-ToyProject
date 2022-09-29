@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {Product} from '../../database/models';
-import Sequelize from 'sequelize';
+import {Product, Artist} from '../../database/models';
+
 type Data = {
   data: any
 }
@@ -10,12 +10,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-    const products = await Product.findAll({
-        where: {
-            ranking: {
-                [Sequelize.Op.ne]: null
+    const musicals = await Artist.findAll({
+        include: [{
+            model: Product,
+            where: {
+                type: 'musical'
             }
-        }
+        }]
     });
-    res.status(200).json({ data: products })
+    res.status(200).json({ data: musicals })
 }

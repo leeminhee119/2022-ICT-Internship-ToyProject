@@ -73,9 +73,13 @@ def getArtists():
                 # code = int(re.findall("http\:\/\/ticket\.interpark\.com\/Ticket\/Goods\/GoodsInfo\.asp\?GoodsCode\=(\d+)\&", prdDetailHTML)[0])
                 title = re.findall('<span class\=\"title\">(.*?)<\/span>', prdDetailHTML)[0]
                 # type
-                type = 'musical'
-                if code_type == '000003':
+                kor_type = re.findall('<td class\=\"title\">(.*?) 예매 랭킹<\/td>', prdDetailHTML)[0]
+                if kor_type == '뮤지컬':
+                    type = 'musical'
+                elif kor_type == '콘서트':
                     type = 'concert'
+                else:
+                    continue #뮤지컬도 아니고 콘서트도 아닌 장르는 저장하지 않음
                 #thumbnail_url, reservation_url
                 p_thumbnail_url = re.findall('<h2><img src\=\"(.*?)\" onError\=', prdDetailHTML)[0]
                 reservation_url = None

@@ -1,11 +1,12 @@
 const { Model, DataTypes } = require('sequelize');
-import Product from './Product';
-import db from '.';
+import sequelize from "..";
+// import Product from './Product';
+// import ArtistsProducts from './ArtistsProducts';
 
-const initArtist = (sequelize: any, DataTypes: any) => {
+const Artist = (sequelize: any, DataTypes: any) => {
   class Artist extends Model {
     static associate(models: any) {
-      Artist.belongsToMany(Product, {through: 'junctionTable'})
+      // Artist.belongsToMany(Product, {through: ArtistsProducts, foreignKey: 'id'});
     }
   }
   Artist.init(
@@ -35,4 +36,4 @@ const initArtist = (sequelize: any, DataTypes: any) => {
   return Artist;
 };
 
-export default initArtist(db.sequelize, DataTypes)
+export default Artist(sequelize, DataTypes)
