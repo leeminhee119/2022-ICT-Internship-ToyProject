@@ -14,7 +14,7 @@ interface ConcertInterface {
 
 const Concert = ({data}:any, props:ConcertInterface) => {
     return (
-        <FourSectionTable typeMuCon="concert"
+        <FourSectionTable title="콘서트 모아보기"
         data={data.data} />
     )
 }

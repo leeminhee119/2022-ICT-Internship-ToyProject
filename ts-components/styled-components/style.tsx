@@ -120,6 +120,9 @@ export const BodyLayout = {
     `,
     MainSection: styled.div`
         min-height: 80vh;
+        &.long {
+            min-height: 85vh;
+        }
         border-right: 1px solid ${themeColor};
         border-left: 1px solid ${themeColor};
         padding: 20px 20px;
@@ -162,3 +165,9 @@ export const TopBarSelectButton = {
         }
     `
 }
+
+export const SubTitle = styled.div`
+    color: ${themeColor};
+    font-size: 20px;
+    font-weight: 600;
+`

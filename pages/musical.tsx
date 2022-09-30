@@ -10,7 +10,7 @@ interface MusicalInterface {
 }
 const Musical = ({data}:any, props:MusicalInterface) => {
     return (
-        <FourSectionTable typeMuCon="musical"
+        <FourSectionTable title="뮤지컬 모아보기"
         data={data.data} />
     )
 }

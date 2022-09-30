@@ -1,51 +1,28 @@
-import React, { useState } from "react";
+import React, { ReactComponentElement, useState } from "react";
 import { ReactElement } from "react";
 import AppBase from '../ts-components/AppBase';
 import styled from "styled-components";
 import { BodyLayout, TopBarSelectButton, } from "../ts-components/styled-components/style";
 import MainSectionTable from "../ts-components/MainSectionTable";
-import TopBarSectionTable from "./TopBarSectionTable";
 import { themeColor } from "./commonVariables";
 import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 
-interface FourSectionTableInterface {
+interface ThreeSectionTableInterface {
     title: string,
     data: any,
 }
-const FourSectionTable = (props:FourSectionTableInterface) => {
-    const [sortbyActor, setSortbyActor] = useState(true); //default: 배우별로 작품 보기
-    function handleTopBarSelectBtn() {
-        setSortbyActor(!sortbyActor); // 배우별로 작품 보기 <-> 지역별로 작품 보기
-    }
+const ThreeSectionTable = (props:ThreeSectionTableInterface) => {
     return (
         <>
         <AppBase title={props.title}>
         <BodyLayout.Wrap>
-            <BodyLayout.TopBar>
-                <TopBarSelectButton.Wrap>
-                    <TopBarSelectButton.Btn 
-                        onClick={handleTopBarSelectBtn}
-                        className={sortbyActor?'selected':''}
-                    >배우별로 공연 보기</TopBarSelectButton.Btn>
-                    <TopBarSelectButton.Btn
-                        onClick={handleTopBarSelectBtn}
-                        className={!sortbyActor?'selected':''}
-                    >지역별로 공연 보기</TopBarSelectButton.Btn>
-                </TopBarSelectButton.Wrap>
-            </BodyLayout.TopBar>
             <BodyLayout.SideBar_left>
-                
+                <Link href='/reviews/post'><button >글쓰기</button></Link>
             </BodyLayout.SideBar_left>
-            <BodyLayout.MainSection>
-                {
-                    sortbyActor?
-                    <MainSectionTable
-                    artistsData={props.data}/>
-                    :
-                    null //지역
-                }
+            <BodyLayout.MainSection className="long"> {/*long 클래스: topbar 만큼의 길이 채워줌 */}
             </BodyLayout.MainSection>
             <BodyLayout.SideBar_right>
                 <SearchBox>
@@ -92,4 +69,4 @@ const SearchBoxInput = styled.input`
         opacity: 30%;
     }
 `
-export default FourSectionTable;
+export default ThreeSectionTable;
