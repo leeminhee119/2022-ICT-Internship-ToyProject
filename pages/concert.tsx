@@ -16,19 +16,7 @@ const Concert = ({data}:any) => {
   }
     return (
         <FourSectionTable title="콘서트 모아보기"
-        data={data.data}
-        leftChildren={[
-          <TopBarSelectButton.Wrap>
-            <TopBarSelectButton.Btn 
-                onClick={handleTopBarSelectBtn}
-                className={sortbyActor?'selected':''}
-            >배우별로 공연 보기</TopBarSelectButton.Btn>
-            <TopBarSelectButton.Btn
-                onClick={handleTopBarSelectBtn}
-                className={!sortbyActor?'selected':''}
-            >지역별로 공연 보기</TopBarSelectButton.Btn>
-          </TopBarSelectButton.Wrap>
-        ]} />
+        data={data.data} />
     )
 }
 

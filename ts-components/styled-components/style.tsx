@@ -133,6 +133,7 @@ export const BodyLayout = {
         width: 15%;
         min-height: 80vh;
         float: left;
+        text-align: center;
     `,
     SideBar_right: styled.div`
         width: 15%;
@@ -171,3 +172,25 @@ export const SubTitle = styled.div`
     font-size: 20px;
     font-weight: 600;
 `
+
+// FOR 공연 선택 @ 공연후기게시판, 공연후기작성페이지, 동행게시판
+export const SelectProduct = {
+    Box: styled.div`
+        margin-bottom: 20px;
+    `,
+    SelectType: styled.select`
+        border: 1px solid ${themeColor};
+        border-radius: 5px;
+        color: ${themeColor};
+        height: 30px;
+        width: 100px;
+        margin-right: 8px;
+    `,
+    SelectProduct: styled.select`
+        border: 1px solid ${themeColor};
+        border-radius: 5px;
+        color: ${themeColor};
+        height: 30px;
+        width: 200px;
+    `,
+}

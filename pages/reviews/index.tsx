@@ -3,55 +3,37 @@ import { ReactElement } from "react";
 import AppBase from '../../ts-components/AppBase';
 import ThreeSectionTable from "../../ts-components/ThreeSectionTable";
 import type { NextPage } from 'next'
-// import fs from 'fs';
-// import path from "path";
-// import matter from "gray-matter";
+import Link from "next/link";
+import styled from 'styled-components';
+import { themeColor } from '../../ts-components/commonVariables';
 
-// export function getAllPostIds() {
-//     const fileNames = fs.readdirSync('reviews');
-  
-//     // Returns an array that looks like this:
-//     // [
-//     //   {
-//     //     params: {
-//     //       id: 'ssg-ssr'
-//     //     }
-//     //   },
-//     //   {
-//     //     params: {
-//     //       id: 'pre-rendering'
-//     //     }
-//     //   }
-//     // ]
-//     return fileNames.map((fileName) => {
-//       return {
-//         params: {
-//           id: fileName.replace(/\.md$/, ''),
-//         },
-//       };
-//     });
-// }
-// export function getPostData(id:any) {
-//     const fullPath = path.join('reviews', `${id}.md`);
-//     const fileContents = fs.readFileSync(fullPath, 'utf8');
-  
-//     // Use gray-matter to parse the post metadata section
-//     const matterResult = matter(fileContents);
-  
-//     // Combine the data with the id
-//     return {
-//       id,
-//       ...matterResult.data,
-//     };
-// }
 interface HomeProps {
     children?: ReactElement[]|ReactElement
 }
 
 const Home: NextPage<HomeProps> = () => {
+    const left = () => {return(
+        <Link href="reviews/post"><PostBtn>후기 작성하기</PostBtn></Link>
+    )}
     return (
-        <ThreeSectionTable title="공연 후기" data=""></ThreeSectionTable>
+        <ThreeSectionTable title="공연 후기" data="" leftSection={left()}>
+            
+        </ThreeSectionTable>
     )
 }
+
+const PostBtn = styled.button`
+    border-radius: 20px;
+    color: #fff;
+    background-color: ${themeColor};
+    font-weight: 900;
+    padding: 8px 15px;
+    text-align: center;
+    margin-top: 30px;
+    &:hover {
+        text-shadow : 5px -1px 0 black;
+        transition: ease-in-out 0.3s;
+    }
+`
 
 export default Home;

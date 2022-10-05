@@ -13,6 +13,8 @@ import Link from "next/link";
 interface ThreeSectionTableInterface {
     title: string,
     data: any,
+    children: ReactElement | ReactElement[],
+    leftSection: ReactElement | ReactElement[]
 }
 const ThreeSectionTable = (props:ThreeSectionTableInterface) => {
     return (
@@ -20,9 +22,10 @@ const ThreeSectionTable = (props:ThreeSectionTableInterface) => {
         <AppBase title={props.title}>
         <BodyLayout.Wrap>
             <BodyLayout.SideBar_left>
-                <Link href='/reviews/post'><button >글쓰기</button></Link>
+                {props.leftSection}
             </BodyLayout.SideBar_left>
             <BodyLayout.MainSection className="long"> {/*long 클래스: topbar 만큼의 길이 채워줌 */}
+                {props.children}
             </BodyLayout.MainSection>
             <BodyLayout.SideBar_right>
                 <SearchBox>

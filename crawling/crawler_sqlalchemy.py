@@ -124,9 +124,9 @@ def getTopProducts():
             
             title = jsonData['data']['goodsName']
             # type = jsonData['data']['genreCode'] # musical: 01011, concert: 01003
-            type = 'musical'
+            type = 'concert'
             if code == '01011':
-                type = 'concert'
+                type = 'musical'
             ranking = int(jsonData['data']['dayRank'])
             p_thumbnail_url = prdThumbnails[i]
             reservation_url = 'https://tickets.interpark.com/goods/{code}'.format(code=ProductNOs[i])

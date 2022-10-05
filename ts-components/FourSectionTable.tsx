@@ -4,7 +4,6 @@ import AppBase from '../ts-components/AppBase';
 import styled from "styled-components";
 import { BodyLayout, TopBarSelectButton, } from "../ts-components/styled-components/style";
 import MainSectionTable from "../ts-components/MainSectionTable";
-import TopBarSectionTable from "./TopBarSectionTable";
 import { themeColor } from "./commonVariables";
 import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,19 +13,10 @@ interface LeftSectionTableInterface {
     children: ReactElement | ReactElement[]
 }
 
-const LeftSectionTable = (props:LeftSectionTableInterface) => {
-    return (
-        <BodyLayout.SideBar_left>
-            {props.children}
-        </BodyLayout.SideBar_left>
-    )
-}
 
 interface FourSectionTableInterface {
     title: string,
     data: any,
-    leftChildren: ReactElement | ReactElement[],
-    sortByStatus: any
 }
 
 const FourSectionTable = (props:FourSectionTableInterface) => {
@@ -39,9 +29,19 @@ const FourSectionTable = (props:FourSectionTableInterface) => {
         <AppBase title={props.title}>
         <BodyLayout.Wrap>
             <BodyLayout.TopBar>
-
+                <TopBarSelectButton.Wrap>
+                    <TopBarSelectButton.Btn 
+                        onClick={handleTopBarSelectBtn}
+                        className={sortbyActor?'selected':''}
+                    >배우별로 공연 보기</TopBarSelectButton.Btn>
+                    <TopBarSelectButton.Btn
+                        onClick={handleTopBarSelectBtn}
+                        className={!sortbyActor?'selected':''}
+                    >지역별로 공연 보기</TopBarSelectButton.Btn>
+                </TopBarSelectButton.Wrap>
             </BodyLayout.TopBar>
-            <LeftSectionTable>{props.leftChildren}</LeftSectionTable>
+            <BodyLayout.SideBar_left>
+            </BodyLayout.SideBar_left>
             <BodyLayout.MainSection>
                 {
                     sortbyActor?
