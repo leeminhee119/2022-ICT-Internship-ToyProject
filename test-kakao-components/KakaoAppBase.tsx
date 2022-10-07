@@ -8,16 +8,9 @@ const KakaoAppBase = (props:KakaoAppBaseInterface) => {
     return (
         <div style={{backgroundColor: 'rgba(0,0,0,0.4)', 
             minHeight: '100vh',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'}}>
-            <div style={{
-                width: '450px',
-                minHeight: '70vh',
-                backgroundColor: '#fff',
-            }}>
-                {props.children}
-            </div>
+            width: '100%',
+            padding: '50px 300px'}}>
+            {props.children}
         </div>
     )
 
