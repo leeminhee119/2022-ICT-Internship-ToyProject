@@ -1,5 +1,8 @@
 import React, { FC } from 'react';
 import {SeriesPosterTable} from './SeriesPosterTable'
+import {SeriesCardSwiper} from './SeriesCardSwiper'
+import {BannerSwiper} from './BannerSwiper'
+import {RankSeriesPosterList} from './RankSeriesPosterList'
 
 interface componentDictInterface {
     [key:string]: any
@@ -12,19 +15,19 @@ const notReady = () => {
 const componentDict:componentDictInterface = {
     // "series_card_view" : null,
     series_card_view : {
-        Component: null,
+        Component: SeriesCardSwiper
     },
     single_card_view : {
         Component: null,
     },
     series_poster_view : {
-        Component: SeriesPosterTable,
+        Component: SeriesPosterTable
     },
     single_poster_view : {
         Component: null,
     },
     series_list_view : {
-        Component: null,
+        Component: RankSeriesPosterList
     },
     single_list_view : {
         Component: null,
@@ -33,7 +36,7 @@ const componentDict:componentDictInterface = {
         Component: null,
     },
     rectangle_view : {
-        Component: null,
+        Component: BannerSwiper
     },
     strategy_view : {
         Component: null,
@@ -42,7 +45,7 @@ const componentDict:componentDictInterface = {
 
 const getComponent = (viewType: string) => {
     if (typeof componentDict[viewType] === undefined || typeof componentDict[viewType] === null) {
-        return notReady;
+        return notReady();
     }
     return componentDict[viewType]
 }

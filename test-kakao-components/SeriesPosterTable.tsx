@@ -1,38 +1,57 @@
 import React from 'react';
+import { ComponentBox } from './style';
 import VerticalPoster from './VerticalPoster'
 
 interface worksInterface {
     [key:string]: string | boolean | {view_count:number}
 }
 interface SeriesPosterTableInterface {
-    // image_src?: string,
-    // title: string,
     info_type: string, // VIEW_COUNT, AUTHOR_NAME, ISSUE_STATE
-    // info_value: number | string | boolean
-    // works: worksInterface
-    // works: worksInterface[]
     works: any
 }
 export const SeriesPosterTable = (props:SeriesPosterTableInterface) => {
     // console.log(props.works)
     let infoValue: string | number | boolean = '';
     const infoType = props.info_type
+    // 항상 6개까지만 뜨도록
+    let six_works = props.works
+    if (props.works.length > 6) {
+        six_works = props.works.slice(0,6)
+    }
     return (
-        (props.works).map((work:any, index:number) => {  // 개별 작품 배열 [{},{},...]
-            if (infoType === "VIEW_COUNT") {
-                infoValue = work.service_property.view_count;
-            } else if (infoType === "AUTHOR_NAME") {
-                infoValue = work.authors;
-            } else {
-                infoValue = work.on_issue;
+        <ComponentBox>
+            {
+                six_works === undefined || six_works === null
+                ? <div>비어있음</div>
+                :(six_works).map((work:any, index:number) => {
+                    if (infoType === "VIEW_COUNT") {
+                        let cnt = work.service_property.view_count
+                        if (cnt >= 100000000) {
+                            cnt = cnt / 100000000;
+                            infoValue = cnt.toLocaleString('ko-KR', {maximumFractionDigits: 1}) + "억"
+                        }
+                        if (cnt >= 10000) {
+                            cnt = cnt / 10000
+                            infoValue = cnt.toLocaleString('ko-KR', {maximumFractionDigits: 1}) + "만"
+                        }
+                        else infoValue = work.service_property.view_count.toString()
+                    } else if (infoType === "AUTHOR_NAME") {
+                        infoValue = work.authors;
+                    } else if (infoType === "ISSUE_STATE") {
+                        work.on_issue == true 
+                        ? infoValue = "연재중"
+                        : infoValue = "완결"
+                    } else {
+                        infoValue = work.category
+                    }
+                    return(
+                        <VerticalPoster key={index}
+                        title={work.title}
+                        image_src={'https://dn-img-page.kakao.com/download/resource?kid=' + work.thumbnail}
+                        info_value={infoValue} />
+                    )
+                })
             }
-            return(
-                <VerticalPoster key={index}
-                title={work.title}
-                image_src={'https://dn-img-page.kakao.com/download/resource?kid=' + work.thumbnail}
-                info_type={infoType}
-                info_value={infoValue} />
-            )
-        })
+        </ComponentBox>
     )
 }
