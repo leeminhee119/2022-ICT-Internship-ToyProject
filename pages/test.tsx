@@ -1,13 +1,9 @@
 
 import React, { useState, useEffect } from "react";
-import { ReactElement } from "react";
-
 import getComponent from "../test-kakao-components/getComponent";
-import { title } from "process";
-import { SeriesPosterTable } from "../test-kakao-components/SeriesPosterTable";
-import { render } from "react-dom";
 import KakaoAppBase from "../test-kakao-components/KakaoAppBase";
 import BaseSection from "../test-kakao-components/BaseSection";
+
 const KakaoTest = () => {
     const [kakaopageData, setKakaopageData] = useState<any>(null);
 
@@ -44,7 +40,43 @@ const KakaoTest = () => {
                 // if (layout.view_data === undefined || layout.view_data.view_type === undefined) {
                 //     continue
                 // }
-                if (layout.type === "MAIN_RANKING")  {
+                if (layout.type === "TOP")  {
+                    const banner_view_type = layout.banner_data.view_type  //square_view
+                    const banner_reference_key = layout.banner_data.reference_key
+                    let banner_reference = [];
+                    if (references[banner_view_type] !== null && references[banner_view_type][banner_reference_key] !== undefined) {
+                        banner_reference = references[banner_view_type][banner_reference_key] // banner data 배열
+                    }
+                    const banner_myComponent = getComponent(banner_view_type)
+
+                    const strategy_view_type = layout.strategy_data.view_type //strategy_view
+                    const strategy_reference_key = layout.strategy_data.reference_key
+                    let strategy_reference = [];
+                    if (references[strategy_view_type] !== null && references[strategy_view_type][strategy_reference_key] !== undefined) {
+                        strategy_reference = references[strategy_view_type][strategy_reference_key] // banner data 배열
+                    }
+                    const strategy_myComponent = getComponent(strategy_view_type)
+                    return (
+                        <>
+                        <BaseSection isTopBanner={true} key={index}>
+                            <>
+                            {
+                                banner_myComponent.Component === null || banner_reference.length === 0
+                                ? <div>데이터가 없습니다.</div>
+                                :<banner_myComponent.TopComponent banner_items={banner_reference}/>
+                            }
+                            </>
+                        </BaseSection>
+                        <BaseSection isTopElse={true} key={index}>
+                            <banner_myComponent.BottomComponent/>
+                        </BaseSection>
+                        <BaseSection key={index}>
+                            <strategy_myComponent.Component btn_items={strategy_reference}/>
+                        </BaseSection>
+                        </>
+                    )
+                }
+                else if (layout.type === "MAIN_RANKING")  {
                     // 실시간랭킹 작품 데이터 없음 -> series_card_view의 데이터로 대체
                     const webtoon_reference = references['series_card_view']["page/reference/0/390/0/F/IOS"]
                     const webnovel_reference = references['series_card_view']["page/reference/0/429/0/F/IOS"]

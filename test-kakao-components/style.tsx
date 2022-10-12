@@ -116,3 +116,65 @@ export const Card = {
     // ItemInfo: styled(Thumbnail.ItemInfo)`
     // `,
 }
+const topBanner_margin_left= '25px'
+export const TopBanner = {
+    ItemImg: styled(Thumbnail.ItemImg)`
+        height: 400px;
+        border-radius: 0;
+        img {
+            margin-right: 5px !important;
+        }
+        img:nth-child(1) {
+            z-index: -1;
+        }
+        img.title {
+            object-fit: cover;
+            width: 200px;
+            margin-left: ${topBanner_margin_left};
+            margin-top: 220px !important;
+        }
+        div.banner_caption {
+            font-size: 12px;
+            font-weight: 100;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        span.banner_subinfo {
+            font-size: 12px;
+            font-weight: 100;
+            color: #fff;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+    `,
+    ItemInfo: styled.div`
+        margin-left: ${topBanner_margin_left};
+    `,
+    ItemCaption: styled.div`
+        font-size: 30px;
+        color: #fff;
+    `
+}
+
+export const ADBanner = styled.div`
+    background-color: #888;
+    height: 60px;
+    border-radius: 5px;
+`
+
+export const StrategyBtns = {
+    BtnBox: styled.div`
+        background-color: #888;
+        border-radius: 5px;
+        height: 45px;
+        display: flex;
+    `,
+    Btn: styled.button`
+        color: #fff;
+        font-size: 13px;
+        font-weight: 100;
+        text-align: center;
+        width: 33.3%;
+    `
+}

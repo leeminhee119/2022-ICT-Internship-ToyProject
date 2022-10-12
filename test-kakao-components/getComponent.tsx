@@ -3,6 +3,10 @@ import {SeriesPosterTable} from './SeriesPosterTable'
 import {SeriesCardSwiper} from './SeriesCardSwiper'
 import {BannerSwiper} from './BannerSwiper'
 import {RankSeriesPosterList} from './RankSeriesPosterList'
+import {TopBannerSection} from './TopBannerSection'
+import {TopADBannerSection} from './TopBannerSection'
+import { TopStrategyBtnSection } from './TopBannerSection';
+import { ADBanner } from './style';
 
 interface componentDictInterface {
     [key:string]: any
@@ -33,13 +37,14 @@ const componentDict:componentDictInterface = {
         Component: null,
     },
     square_view : {
-        Component: null,
+        TopComponent: TopBannerSection,
+        BottomComponent: TopADBannerSection
     },
     rectangle_view : {
         Component: BannerSwiper
     },
     strategy_view : {
-        Component: null,
+        Component: TopStrategyBtnSection
     },
 }
 
