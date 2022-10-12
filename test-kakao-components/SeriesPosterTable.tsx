@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentBox } from './style';
 import VerticalPoster from './VerticalPoster'
+import convertViewCount from './convertViewCount'
 
 interface worksInterface {
     [key:string]: string | boolean | {view_count:number}
@@ -25,16 +26,7 @@ export const SeriesPosterTable = (props:SeriesPosterTableInterface) => {
                 ? <div>비어있음</div>
                 :(six_works).map((work:any, index:number) => {
                     if (infoType === "VIEW_COUNT") {
-                        let cnt = work.service_property.view_count
-                        if (cnt >= 100000000) {
-                            cnt = cnt / 100000000;
-                            infoValue = cnt.toLocaleString('ko-KR', {maximumFractionDigits: 1}) + "억"
-                        }
-                        if (cnt >= 10000) {
-                            cnt = cnt / 10000
-                            infoValue = cnt.toLocaleString('ko-KR', {maximumFractionDigits: 1}) + "만"
-                        }
-                        else infoValue = work.service_property.view_count.toString()
+                        infoValue = convertViewCount(work.service_property.view_count)
                     } else if (infoType === "AUTHOR_NAME") {
                         infoValue = work.authors;
                     } else if (infoType === "ISSUE_STATE") {

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { ComponentBox } from './style';
-import HorizontalPoster from './HorizontalPoster'
+import HorizontalPoster from './HorizontalPoster';
+import convertViewCount from './convertViewCount';
 import styled from 'styled-components';
 
 interface RankSeriesPosterListInterface {
@@ -53,18 +54,7 @@ export const RankSeriesPosterList = (props:RankSeriesPosterListInterface) => {
             </SelectType.BtnBox>
             {
                 currentType.map((work:any, index:number) => {
-                    let cnt = work.service_property.view_count
-                    let viewCount = ''
-                    if (cnt >= 100000000) {
-                        cnt = cnt / 100000000;
-                        viewCount = cnt.toLocaleString('ko-KR', {maximumFractionDigits: 1}) + "억"
-                    }
-                    if (cnt >= 10000) {
-                        cnt = cnt / 10000
-                        viewCount = cnt.toLocaleString('ko-KR', {maximumFractionDigits: 1}) + "만"
-                    } else {
-                        viewCount = work.service_property.view_count.toString()
-                    } 
+                    const viewCount = convertViewCount(work.service_property.view_count)
                     const infoValue = work.sub_category+' · '+viewCount+' · '+work.authors
                     return (
                         <HorizontalPoster key={index}
