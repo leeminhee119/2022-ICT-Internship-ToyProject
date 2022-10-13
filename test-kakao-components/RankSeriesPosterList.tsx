@@ -53,7 +53,7 @@ export const RankSeriesPosterList = (props:RankSeriesPosterListInterface) => {
                 }
             </SelectType.BtnBox>
             {
-                currentType.map((work:any, index:number) => {
+                (currentType.slice(0,5)).map((work:any, index:number) => {
                     const viewCount = convertViewCount(work.service_property.view_count)
                     const infoValue = work.sub_category+' · '+viewCount+' · '+work.authors
                     return (
@@ -61,7 +61,13 @@ export const RankSeriesPosterList = (props:RankSeriesPosterListInterface) => {
                         title={work.title}
                         image_src={'https://dn-img-page.kakao.com/download/resource?kid=' + work.thumbnail}
                         info_value={infoValue}
-                        rank={index+1} />
+                        rank={index+1}
+                        is_all_free={work.is_all_free}
+                        is_waitfree={work.is_waitfree}
+                        is_waitfree_plus={work.is_waitfree_plus}
+                        age_grade={work.age_grade}
+                        view_count={work.service_property.view_count}
+                        />
                     )
                 })
             }

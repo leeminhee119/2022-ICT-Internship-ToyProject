@@ -6,7 +6,6 @@ import {RankSeriesPosterList} from './RankSeriesPosterList'
 import {TopBannerSection} from './TopBannerSection'
 import {TopADBannerSection} from './TopBannerSection'
 import { TopStrategyBtnSection } from './TopBannerSection';
-import { ADBanner } from './style';
 
 interface componentDictInterface {
     [key:string]: any

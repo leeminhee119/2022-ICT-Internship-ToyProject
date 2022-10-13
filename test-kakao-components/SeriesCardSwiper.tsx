@@ -20,7 +20,6 @@ export const SeriesCardSwiper = (props:SeriesCardSwiperInterface) => {
         slidesPerView={2.8}
         freeMode={true}
         modules={[FreeMode]}
-        // onSwiper={(swiper) => console.log(swiper)}
         >
         {
             (props.works).map((work:any, index:number) => {  // 개별 작품 배열 [{},{},...]
@@ -28,7 +27,12 @@ export const SeriesCardSwiper = (props:SeriesCardSwiperInterface) => {
                     <SwiperSlide key={index}>
                     <VerticalCard
                     image_src={'https://dn-img-page.kakao.com/download/resource?kid=' + work.asset_property.card_img}
-                    title_image_src={'https://dn-img-page.kakao.com/download/resource?kid=' + work.asset_property.card_text_img}
+                    title={'https://dn-img-page.kakao.com/download/resource?kid=' + work.asset_property.card_text_img}
+                    view_count={work.service_property.view_count}
+                    is_all_free={work.is_all_free}
+                    is_waitfree={work.is_waitfree}
+                    is_waitfree_plus={work.is_waitfree_plus}
+                    age_grade={work.age_grade}
                     />
                     </SwiperSlide>
                 )

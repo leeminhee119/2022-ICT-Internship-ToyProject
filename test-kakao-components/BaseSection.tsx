@@ -10,6 +10,8 @@ const kakaopageBaseSection = {
         width: 100%;
         margin: 0 auto;
         margin-bottom: -${verticalGap};
+        position: relative;
+        // z-index: -2;
     `,
     TitleSection: styled.div`
         font-size: 20px;

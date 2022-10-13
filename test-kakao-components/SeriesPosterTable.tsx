@@ -12,7 +12,7 @@ interface SeriesPosterTableInterface {
 }
 export const SeriesPosterTable = (props:SeriesPosterTableInterface) => {
     // console.log(props.works)
-    let infoValue: string | number | boolean = '';
+    let infoValue: string = '';
     const infoType = props.info_type
     // 항상 6개까지만 뜨도록
     let six_works = props.works
@@ -40,7 +40,13 @@ export const SeriesPosterTable = (props:SeriesPosterTableInterface) => {
                         <VerticalPoster key={index}
                         title={work.title}
                         image_src={'https://dn-img-page.kakao.com/download/resource?kid=' + work.thumbnail}
-                        info_value={infoValue} />
+                        info_value={infoValue}
+                        is_all_free={work.is_all_free}
+                        is_waitfree={work.is_waitfree}
+                        is_waitfree_plus={work.is_waitfree_plus}
+                        age_grade={work.age_grade}
+                        view_count={work.service_property.view_count}
+                        />
                     )
                 })
             }

@@ -57,23 +57,23 @@ const KakaoTest = () => {
                     }
                     const strategy_myComponent = getComponent(strategy_view_type)
                     return (
-                        <>
-                        <BaseSection isTopBanner={true} key={index}>
-                            <>
-                            {
-                                banner_myComponent.Component === null || banner_reference.length === 0
-                                ? <div>데이터가 없습니다.</div>
-                                :<banner_myComponent.TopComponent banner_items={banner_reference}/>
-                            }
-                            </>
-                        </BaseSection>
-                        <BaseSection isTopElse={true} key={index}>
-                            <banner_myComponent.BottomComponent/>
-                        </BaseSection>
-                        <BaseSection key={index}>
-                            <strategy_myComponent.Component btn_items={strategy_reference}/>
-                        </BaseSection>
-                        </>
+                        <div key={index}>
+                            <BaseSection isTopBanner={true}>
+                                <>
+                                {
+                                    banner_myComponent.Component === null || banner_reference.length === 0
+                                    ? <div>데이터가 없습니다.</div>
+                                    :<banner_myComponent.TopComponent banner_items={banner_reference}/>
+                                }
+                                </>
+                            </BaseSection>
+                            <BaseSection isTopElse={true}>
+                                <banner_myComponent.BottomComponent/>
+                            </BaseSection>
+                            <BaseSection>
+                                <strategy_myComponent.Component btn_items={strategy_reference}/>
+                            </BaseSection>
+                        </div>
                     )
                 }
                 else if (layout.type === "MAIN_RANKING")  {
