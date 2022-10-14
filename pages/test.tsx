@@ -118,7 +118,8 @@ const KakaoTest = () => {
                     }
                     const myComponent = getComponent(view_type)
                     return (
-                        <BaseSection key={index} title={layout.title}>
+                        <BaseSection key={index} title={layout.title}
+                        isCardSwiper={view_type=="series_card_view" ? true:false}>
                             <>
                             {
                                 myComponent.Component === null || reference.length === 0

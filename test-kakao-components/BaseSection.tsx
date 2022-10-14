@@ -29,6 +29,10 @@ const kakaopageBaseSection = {
         &.top_else {
             padding-bottom: 8px;
         }
+        &.card_swiper {
+            padding-left: 15px;
+            padding-right: 0px;
+        }
     `
 }
 interface BaseSectionInterface {
@@ -36,6 +40,7 @@ interface BaseSectionInterface {
     title?: string,
     isTopBanner?: boolean,
     isTopElse?: boolean,
+    isCardSwiper?: boolean,
 }
 const BaseSection = (props:BaseSectionInterface) => {
     return (
@@ -48,6 +53,8 @@ const BaseSection = (props:BaseSectionInterface) => {
                 ? 'top_banner'
                 : props.isTopElse
                 ? 'top_else'
+                : props.isCardSwiper
+                ? 'card_swiper'
                 : ''
             }>
                 {props.children}

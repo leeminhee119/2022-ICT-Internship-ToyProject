@@ -16,7 +16,7 @@ export const SeriesCardSwiper = (props:SeriesCardSwiperInterface) => {
     return (
         <ComponentBox>
         <Swiper
-        spaceBetween={1}
+        spaceBetween={0}
         slidesPerView={2.8}
         freeMode={true}
         modules={[FreeMode]}

@@ -97,6 +97,7 @@ export const PosterHorizontal = {
 export const Card = {
     //Item > ItemImg, ItemTitle, ItemInfo
     Item : styled(Thumbnail.Item)`
+        margin-bottom: 30px;
     `,
     ItemImg: styled(Thumbnail.ItemImg)`
         width: 148px;
